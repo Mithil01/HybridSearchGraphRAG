@@ -8,11 +8,10 @@ from dotenv import load_dotenv
 load_dotenv()  
 import streamlit as st
 st.write(
-    "Has environment variables been set:",
-    os.environ["openai_api_key"] == st.secrets["openai_api_key"],
+    os.environ["OPENAI_API_KEY"] == st.secrets["OPENAI_API_KEY"]
 )
-openai_api_key = os.environ['openai_api_key'] 
-client = OpenAI(api_key=openai_api_key)
+OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 
 system_prompt = """
