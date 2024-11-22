@@ -1,6 +1,5 @@
 import nest_asyncio
 from openai import OpenAI
-import os
 
 nest_asyncio.apply()
 from dotenv import load_dotenv
