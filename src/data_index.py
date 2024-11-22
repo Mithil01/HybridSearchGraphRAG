@@ -2,12 +2,18 @@ from llama_index.graph_stores.neo4j import Neo4jPropertyGraphStore
 from llama_index.core.vector_stores.types import VectorStoreQuery
 from openai import OpenAI
 from data_models import KeywordsModel
-import os
 from dotenv import load_dotenv
 load_dotenv()  
-openai_api_key = os.environ['OPENAI_API_KEY'] 
-client = OpenAI(api_key=openai_api_key)
-neo4j_pass = os.environ['neo4j_pass'] 
+import streamlit as st
+import os
+
+st.write(
+    "Has environment variables been set:",
+    os.environ["openai_api_key"] == st.secrets["openai_api_key"],
+    os.environ['neo4j_pass'] == st.secrets["neo4j_pass"]
+)
+openai_api_key = os.environ['openai_api_key']
+neo4j_pass = os.environ['neo4j_pass']
 
 system_prompt = """
 Given some initial query, generate synonyms or related keywords up to 10 in total, considering possible cases of pluralization, common expressions, etc.
