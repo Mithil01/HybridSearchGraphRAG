@@ -7,10 +7,7 @@ import os
 from openai import OpenAI
 from dotenv import load_dotenv
 load_dotenv()  
-st.write(
-    os.environ["OPENAI_API_KEY"] == st.secrets["OPENAI_API_KEY"]
-)
-OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
+OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 
