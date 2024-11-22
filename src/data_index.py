@@ -9,10 +9,17 @@ import os
 
 st.write(
     "Has environment variables been set:",
-    os.environ["openai_api_key"] == st.secrets["openai_api_key"],
-    os.environ['neo4j_pass'] == st.secrets["neo4j_pass"]
+    os.environ["openai_api_key"] == st.secrets["OPENAI_API_KEY"],
+    os.environ['NEO4J_USERNAME'] == st.secrets["NEO4J_USERNAME"],
+    os.environ['NEO4J_URI'] == st.secrets["NEO4J_URI"],
+    os.environ['neo4j_pass'] == st.secrets["NEO4J_PASSWORD"]
 )
-openai_api_key = os.environ['openai_api_key']
+
+openai_api_key = os.environ['OPENAI_API_KEY'] 
+client = OpenAI(api_key=openai_api_key)
+NEO4J_URI = os.environ['NEO4J_URI']
+NEO4J_USERNAME = os.environ['NEO4J_USERNAME']
+NEO4J_PASSWORD = os.environ['NEO4J_PASSWORD']
 neo4j_pass = os.environ['neo4j_pass']
 
 system_prompt = """
@@ -24,9 +31,9 @@ The resulting list should be a list of entity names used to index a graph databa
 class DataIndexer:
     def __init__(self):
         self.graph_store = Neo4jPropertyGraphStore(
-            username="neo4j",
-            password=neo4j_pass,
-            url="bolt://localhost:7687",)
+            username=NEO4J_USERNAME,
+            password=NEO4J_PASSWORD,
+            url=NEO4J_URI,)
 
     def get_embeddings(self, texts: list[str]):
 
