@@ -7,19 +7,12 @@ load_dotenv()
 import streamlit as st
 import os
 
-st.write(
-    "Has environment variables been set:",
-    os.environ["OPENAI_API_KEY"] == st.secrets["OPENAI_API_KEY"],
-    os.environ['NEO4J_USERNAME'] == st.secrets["NEO4J_USERNAME"],
-    os.environ['NEO4J_URI'] == st.secrets["NEO4J_URI"],
-    os.environ['neo4j_pass'] == st.secrets["NEO4J_PASSWORD"]
-)
 
-OPENAI_API_KEY = os.environ['OPENAI_API_KEY'] 
+OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 client = OpenAI(api_key=OPENAI_API_KEY)
-NEO4J_URI = os.environ['NEO4J_URI']
-NEO4J_USERNAME = os.environ['NEO4J_USERNAME']
-NEO4J_PASSWORD = os.environ['NEO4J_PASSWORD']
+NEO4J_URI = st.secrets["NEO4J_URI"]
+NEO4J_USERNAME = st.secrets["NEO4J_USERNAME"]
+NEO4J_PASSWORD = st.secrets["NEO4J_PASSWORD"]
 #neo4j_pass = os.environ['neo4j_pass']
 
 system_prompt = """
